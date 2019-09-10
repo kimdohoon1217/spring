@@ -39,6 +39,7 @@
 	<bean id="boardDaoS2" class="kr.or.ddit.test.board.dao.BoardDao"/>
 	
 	<!-- spring bean scope prototype 테스트를 위한 빈 선언 -->
+	<!-- prototype 스코프는 해당 스프링 빈을 요청할 때마다 새로운 객체를 생성하여 전달 -->
 	<bean id="boardDaoP" class="kr.or.ddit.test.board.dao.BoardDao" scope="prototype"/>
 	
 </beans>
