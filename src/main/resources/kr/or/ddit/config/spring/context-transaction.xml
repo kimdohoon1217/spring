@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<!-- context-datasource.xml 에잇는 datasource를 읽을거기때문에 일단 적는다 -->
+		<property name="dataSource" ref="datasource"></property>
+	</bean>
+	
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<!-- userDao.insertUser : 
+				 userDao.selectList : 
+				 메소드 이름별로 트랜잭션에 대한 세부설정
+			 -->
+			 <!-- propagation 어떤메소드에대해서 트랜잭션을 처리할지를 설정하지 않앗지만 그 메소드들이 실행될떄 트랜잭션을 설정해주는것? -->
+			<tx:method name="*" propagation="REQUIRED"/>
+<!-- 			<tx:method name="select*" read-only="true" propagation="REQUIRED"/> -->
+<!-- 			<tx:method name="get*" read-only="true" propagation="REQUIRED"/> -->
+		</tx:attributes>		
+	</tx:advice>
+	
+	<aop:config>
+		<!-- 위에잇는놈을 이야기함  execution(리턴타입 처리할패키지(service패키지의 어떤클래스 어떤이름 어떤메서드인지 상관없다)-->
+		<aop:advisor advice-ref="txAdvice" pointcut="execution(* kr.or.ddit..service.*.*(..))"/>
+	</aop:config>
+
+</beans>
