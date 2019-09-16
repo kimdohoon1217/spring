@@ -8,13 +8,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import kr.or.ddit.user.model.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:kr/or/ddit/spring/ioc/application-context-type-test.xml")
+@ContextConfiguration(locations = {"classpath:kr/or/ddit/spring/ioc/application-context-type-test.xml",
+		"classpath:kr/or/ddit/config/spring/context-datasource-test.xml"})
 public class TypeConvertTest {
 
 	private static final Logger logger = LoggerFactory.getLogger(TypeConvertTest.class);

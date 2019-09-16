@@ -16,7 +16,9 @@ import kr.or.ddit.user.service.IUserService;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:kr/or/ddit/spring/ioc/component-scan-test.xml")
+@ContextConfiguration(locations = 
+		{"classpath:kr/or/ddit/spring/ioc/component-scan-test.xml", //test rosources
+		"classpath:kr/or/ddit/config/spring/context-datasource-test.xml"}) //test resource
 public class SpringComponentScanTest {
 	
 	private static final Logger logger = LoggerFactory.getLogger(SpringComponentScanTest.class);
