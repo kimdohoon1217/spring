@@ -17,9 +17,9 @@ public class ProdController {
 	private IProdService prodService;
 	
 	@RequestMapping(path = "prodList", method = RequestMethod.GET)
-	public String prodList(Model model, String id) {
+	public String prodList(Model model, String prod) {
 		
-		model.addAttribute("prodList", prodService.getProd(id));
+		model.addAttribute("prodList", prodService.getProd(prod));
 		return "prod/prodList";
 		
 	}

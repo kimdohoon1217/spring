@@ -53,7 +53,7 @@
 	
 	
 				
-				<c:forEach items="${list }" var="prod">
+				<c:forEach items="${prodList }" var="prod">
 					<tr class = "prodTr">
 						<td>${prod.LPROD_NM}</td>
 						<td>${prod.LPROD_GU}</td>

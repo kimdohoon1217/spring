@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.or.ddit.common.model.Page;
 import kr.or.ddit.user.model.User;
@@ -80,7 +81,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(path = "userPagingList", method = RequestMethod.GET)
-	//public String userPagingList(Model model, Integer page, Integer pagesize) {
+	//public String userPagingList(Model model, @RequestParam(defaultValue = "1")Integer page, @RequestParam(defaultValue = "10")Integer pagesize) {
 	public String userPagingList(Model model, Page page) {
 		
 //		page = page == null ? 1 : page;

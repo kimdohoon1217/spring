@@ -33,7 +33,7 @@
 </script>
 </head>
 <body>
-<form id = "frm" action="${cp }/prod" method = "get">
+<form id = "frm" action="${cp }/prod/prodList" method = "get">
 	<input type = "hidden" id = "prod" name = "prod"/>
 </form>
 
