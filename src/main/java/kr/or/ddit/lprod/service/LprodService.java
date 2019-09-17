@@ -23,6 +23,10 @@ public class LprodService implements ILprodService {
 		lprodDao = new LprodDao();
 	}
 	
+	
+	
+	
+	
 	@Override
 	public Map<String, Object> getLprodPagingList(Page page) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -34,6 +38,13 @@ public class LprodService implements ILprodService {
 		map.put("paginationSize", (int)Math.ceil((double)totalCnt / page.getPagesize()));
 		
 		return map;
+	}
+
+	@Override
+	public List<Lprod> getLprodList() {
+		List<Lprod> list = null;
+		list = lprodDao.getLprodList();
+		return list;
 	}
 
 }

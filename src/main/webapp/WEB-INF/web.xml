@@ -48,4 +48,10 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	
+	<!-- context path 설정 : 서버 기동시 application scope에 cp라는 속성 컨택스트 패스 값을 넣어준다 -->
+	<listener>
+		<listener-class>kr.or.ddit.listener.ContextPathInitListener</listener-class>
+	</listener>
+	
 </web-app>

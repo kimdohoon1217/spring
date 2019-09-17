@@ -15,8 +15,17 @@ import jdk.nashorn.internal.ir.annotations.Ignore;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:kr/or/ddit/config/spring/servlet-context.xml") //controller scan : servlet-context.xml
+
+
+//service Resource 와  dao Resource 를 읽기위해서 classpath 를 더해준다
+//locations = {
+//"classpath:kr/or/ddit/config/spring/servlet-context.xml",
+//"classpath:kr/or/ddit/config/spring/context-root.xml",
+//"classpath:kr/or/ddit/config/spring/context-datasource-test.xml",
+//"classpath:kr/or/ddit/config/spring/context-transaction.xml"}
+
 @WebAppConfiguration	//스프링 컨테이너를 구성할 web기반 application context로 구성
-public class WebTestConfig {
+public class WebTestConfig  extends RootTestConfig{
 	//접근제어자 : private (접근불가)
 	//			protected(상속받은 녀석들은 접근가능)
 	//			default(같은 패키지의 클래스들은 접근 가능)
