@@ -3,6 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
@@ -23,14 +24,17 @@
 
 
 	<!-- view resolver : jsp - internalResourceViewResolver -->
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/views/"/> <!-- 접두어 -->
-		<property name="suffix" value=".jsp"/> <!-- 접미어 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:prefix="/WEB-INF/views/"
+		p:suffix=".jsp"/>
+		<!-- <property name="prefix" value="/WEB-INF/views/"/> 접두어 -->
+		<!-- <property name="suffix" value=".jsp"/> 접미어 -->
+		
 		<!-- controller에서 리턴하는 viewName prefix와 suffix가 결합되서 jsp 경로를 판단 
 			ex : controller 리턴한 viewName : index
 			 prefix + viewName + suffix
 			  /WEB-INF/views/(index).jsp => /WEB-INF/views/index.jsp
 		-->
 		    
-	</bean>
+	<!-- </bean> -->
 </beans>
