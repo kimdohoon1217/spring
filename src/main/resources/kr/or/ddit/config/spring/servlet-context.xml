@@ -37,4 +37,16 @@
 		-->
 		    
 	<!-- </bean> -->
+	
+	
+	<!-- multipartResolver -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="5242880"/> <!-- 5MB -->
+		<property name="maxUploadSizePerFile" value="26214400"/> <!-- 25MB -->
+		<!-- 1kb = 1024 * 1024 bytes
+		 10000000bytes (1mb) = 1000kbytes = 1mbytes
+		  -->
+	</bean>
+	
+	
 </beans>

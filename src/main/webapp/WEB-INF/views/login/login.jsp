@@ -1,6 +1,7 @@
 <%@page import="kr.or.ddit.user.model.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -68,7 +69,9 @@
   
 
   <body>
-
+  	userId : ${userId }<br>
+  	alias : ${alias }
+  
     <div class="container">
      <%
      	HttpSession httpSession = request.getSession();
@@ -76,7 +79,7 @@
          	String userName = "";
          	userName = userVo == null ? "" : userVo.getUserNm();
      %>
-     	사용자 이름 : <%=userName %>
+     	<%-- 사용자 이름 : <%=userName %> --%>
         <%
         //request.setAttribute("userId", userId);
         //userId = userId == null? "" : userId;
