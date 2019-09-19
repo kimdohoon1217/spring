@@ -24,7 +24,9 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import kr.or.ddit.exception.NoFileException;
 import kr.or.ddit.mvc.model.Addr;
@@ -41,6 +43,9 @@ import kr.or.ddit.util.model.FileInfo;
 @Controller
 public class SpringMvcController {
 	private static final Logger logger = LoggerFactory.getLogger(SpringMvcController.class);
+	
+	@javax.annotation.Resource(name = "jsonView")
+	private View jsonView;
 	
 	
 	//@RequestMapping이 붙은 메소드가 실행되기전에 @ModelAttribute 메소드가 먼저 실행되고
@@ -217,6 +222,39 @@ public class SpringMvcController {
 		int num = number;
 		return "mvc/view";
 		
+	}
+	
+	@RequestMapping("jsonView")
+	public String jsonView(Model model) {
+		List<String> rangers = new ArrayList<String>();
+		rangers.add("brown");
+		rangers.add("sally");
+		rangers.add("cony");
+		
+		model.addAttribute("rangers", rangers);
+		
+		//jsp로 응답을 만들어내기위해서 폴더랑 jsp파일명만 넘겻엇는데 지금하는건 json 선언해놓은 view가하나있다  json bean으로가서 jsp처리가아닌 json으로 처리해준다 
+		// resolver로 우선순위를 만들어내서 
+		return "jsonView";
+	}
+	
+	@RequestMapping("jsonView2")
+	public View jsonView2(Model model) {
+		List<String> rangers = new ArrayList<String>();
+		rangers.add("brown");
+		rangers.add("sally");
+		rangers.add("cony");
+		
+		model.addAttribute("rangers", rangers);
+		
+		return jsonView;
+		//return new MappingJackson2JsonView();
+	}
+	
+	@RequestMapping("fileDownloadView")
+	public String fileDownloadView(String pictureName, Model model) {
+		model.addAttribute("pictureName", pictureName);
+		return "fileDownloadView";
 	}
 	
 }

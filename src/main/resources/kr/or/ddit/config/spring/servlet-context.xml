@@ -24,8 +24,25 @@
 	<mvc:default-servlet-handler/>
 
 
-	<!-- view resolver : jsp - internalResourceViewResolver -->
+	<!-- view resolver : beanNameViewResolver -->
+	<!-- controller가 리턴하는 viewName 과 일치하는 spring Bean이 있으면 (view) 해당 view객체를 통해
+		응답을 생성하도록 한다 login/login
+	 -->
+	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="0"/>
+	</bean>
+
+	<!-- model객체있는 속성들을 json 문자열로 응답을 생성 -->
+	<bean name="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+	
+	<!-- fileDownloadView : 고정된 이미지를 다운로드(sally.png) -->
+	<bean name="fileDownloadView" class="kr.or.ddit.view.FileDownloadView"/>
+
+	<!-- view resolver : jsp - internalResourceViewResolver (order 1)
+		해당 리소스(jsp)가 존재하지 않더라도 그대로 forward, 오타등으로 잘못 입력시 404가 발생
+	-->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:order="1" 
 		p:prefix="/WEB-INF/views/"
 		p:suffix=".jsp"/>
 		<!-- <property name="prefix" value="/WEB-INF/views/"/> 접두어 -->
