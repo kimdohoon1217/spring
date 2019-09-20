@@ -115,6 +115,25 @@ public class UserController {
 		
 	}
 	
+	
+	@RequestMapping(path = "userPagingListAjaxView")
+	public String userPagingListAjaxView() {
+		return "user/userPagingListAjaxView";
+	}
+	
+	@RequestMapping(path = "userPagingListAjax", method = RequestMethod.GET)
+	//public String userPagingList(Model model, @RequestParam(defaultValue = "1")Integer page, @RequestParam(defaultValue = "10")Integer pagesize) {
+	public String userPagingListAjax(Model model, Page page) {
+		
+		model.addAttribute("pageVo", page);
+		
+		Map<String, Object> resultMap = userService.getUserPagingList(page);
+		model.addAllAttributes(resultMap);
+		
+		return "jsonView";
+		
+	}
+	
 	@GetMapping("user")
 	public String userDetail(Model model, String userId) {
 		
@@ -223,5 +242,26 @@ public class UserController {
 			}
 	}
 	
+	/**
+	 * Method : userPagingListHtmlAjax
+	 * 작성자 : PC-18
+	 * 변경이력 :
+	 * @param page
+	 * @param pagesize
+	 * @param model
+	 * @return
+	 * Method 설명 : 사용자 페이징 리스트의 결과를 html로 생성한다 (jsp 응답)
+	 */
+	@RequestMapping("userPagingListHtmlAjax")
+	public String userPagingListHtmlAjax(@RequestParam(defaultValue = "1") int page,
+										 @RequestParam(defaultValue = "10") int pagesize,
+										 Model model) {
+		Page pageVo = new Page(page, pagesize);
+		Map<String, Object> resultMap = userService.getUserPagingList(pageVo);
+		model.addAllAttributes(resultMap);
+		model.addAttribute("pageVo", pageVo);
+		
+		return "user/userPagingListHtmlAjax";
+	}
 	
 }	
