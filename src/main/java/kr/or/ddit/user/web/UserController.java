@@ -17,10 +17,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.ddit.common.model.Page;
@@ -121,6 +123,10 @@ public class UserController {
 		return "user/userPagingListAjaxView";
 	}
 	
+	
+	
+	
+	
 	@RequestMapping(path = "userPagingListAjax", method = RequestMethod.GET)
 	//public String userPagingList(Model model, @RequestParam(defaultValue = "1")Integer page, @RequestParam(defaultValue = "10")Integer pagesize) {
 	public String userPagingListAjax(Model model, Page page) {
@@ -133,6 +139,27 @@ public class UserController {
 		return "jsonView";
 		
 	}
+	
+
+   /**
+   * Method : userPagingListAjaxRequestBody
+   * 작성자 : JEON MIN GYU
+   * 변경이력 :
+   * @param page
+   * @param model
+   * @return
+   * Method 설명 : 사용자 페이징 리스트 결과를 json형식으로 생성
+   */
+   @RequestMapping(path = "userPagingListAjaxRequestBody", method = RequestMethod.POST)
+   @ResponseBody
+   public Map<String, Object> userPagingListAjaxRequestBody(@RequestBody Page page, Model model) {
+      
+      Map<String, Object> resultMap = userService.getUserPagingList(page);
+      resultMap.put("pageVo", page);
+      
+      return resultMap;
+   }
+	
 	
 	@GetMapping("user")
 	public String userDetail(Model model, String userId) {
@@ -184,7 +211,7 @@ public class UserController {
 		else {
 			FileInfo fileInfo = FileUtil.getFileInfo(picture.getOriginalFilename());
 			
-			//첨부된 파일이 있을 경우만 업로드 처리
+			//첨부된 파일이 있을 경우만 업로드 처리s
 			if(picture.getSize() > 0) {
 				try {
 					picture.transferTo(fileInfo.getFile());

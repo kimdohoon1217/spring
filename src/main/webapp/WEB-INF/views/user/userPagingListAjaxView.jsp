@@ -87,6 +87,25 @@
 		})
 	}
 	
+	function getUserListRequestBody(page, pagesize){
+		   var param = {};
+		   param.page = page;
+		   param.pagesize = pagesize;
+		   console.log("param : " + param);
+		   $.ajax({
+		      url : "${cp}/user/userPagingListAjaxRequestBody",
+		      contentType : "application/json",
+		      dataType : "json",
+		      method : "post",
+		      data : JSON.stringify(param),
+		      success : function(data){
+		         createUserListTbody(data.userList);
+		         createPagination(data.pageVo, data.paginationSize);
+		      }
+		   });
+	}   
+	
+	
 	
 	//ajax -> json
 	//ajax call을 통해 page, pagesize 하는 사용자
