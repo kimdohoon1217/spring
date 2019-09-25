@@ -28,8 +28,10 @@
 	
 	
 	<!-- userService -->
-	<context:component-scan base-package="kr.or.ddit" />
-	
+	<context:component-scan base-package="kr.or.ddit" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+	</context:component-scan>
 	<!-- Resource 어노테이션 처리 -->
 	<context:annotation-config/>
 

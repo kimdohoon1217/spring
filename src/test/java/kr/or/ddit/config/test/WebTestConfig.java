@@ -18,9 +18,12 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import jdk.nashorn.internal.ir.annotations.Ignore;
+import kr.or.ddit.config.RootConfig;
+import kr.or.ddit.config.ServletConfig;
+import kr.or.ddit.config.spring.DatasourceConfigTest;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath:kr/or/ddit/config/spring/servlet-context.xml") //controller scan : servlet-context.xml
+//@ContextConfiguration("classpath:kr/or/ddit/config/spring/servlet-context.xml") //controller scan : servlet-context.xml
 
 
 //service Resource 와  dao Resource 를 읽기위해서 classpath 를 더해준다
@@ -30,8 +33,10 @@ import jdk.nashorn.internal.ir.annotations.Ignore;
 //"classpath:kr/or/ddit/config/spring/context-datasource-test.xml",
 //"classpath:kr/or/ddit/config/spring/context-transaction.xml"}
 
+@ContextConfiguration(classes = {ServletConfig.class, RootConfig.class,  DatasourceConfigTest.class})
+
 @WebAppConfiguration	//스프링 컨테이너를 구성할 web기반 application context로 구성
-public class WebTestConfig  extends RootTestConfig{
+public class WebTestConfig{
 	//접근제어자 : private (접근불가)
 	//			protected(상속받은 녀석들은 접근가능)
 	//			default(같은 패키지의 클래스들은 접근 가능)

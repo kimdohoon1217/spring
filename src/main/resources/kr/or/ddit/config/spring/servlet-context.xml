@@ -23,6 +23,20 @@
 	<!-- 스프링이 처리하지 못하는 요청에 대해서 was(servlet-container)에 있는  default servlet으로 처리 위임 -->
 	<mvc:default-servlet-handler/>
 
+	<!-- tiles view resolver -->
+	<bean class="org.springframework.web.servlet.view.tiles3.TilesViewResolver">
+		<property name="order" value="0"/>
+		<property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"></property>
+	</bean>
+	
+	<bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>classpath:kr/or/ddit/config/tiles/tiles-config.xml</value>
+			</list>
+		</property>
+	</bean>
+
 
 	<!-- view resolver : beanNameViewResolver -->
 	<!-- controller가 리턴하는 viewName 과 일치하는 spring Bean이 있으면 (view) 해당 view객체를 통해
@@ -42,7 +56,7 @@
 		해당 리소스(jsp)가 존재하지 않더라도 그대로 forward, 오타등으로 잘못 입력시 404가 발생
 	-->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-		p:order="1" 
+		p:order="2" 
 		p:prefix="/WEB-INF/views/"
 		p:suffix=".jsp"/>
 		<!-- <property name="prefix" value="/WEB-INF/views/"/> 접두어 -->
